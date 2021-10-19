@@ -1,14 +1,16 @@
-# frozen_string_literal: true
-
-module V1
-  class ThingsController < ApplicationController
-    def index
-      render json: { things: [
+class V1::ThingsController < ApplicationController
+  def index
+    render json: {
+      :things => [
         {
-          message: 'some-thing',
-          guid: '0415674d-a0e8-4748-af68-a5f53a05c453'
+          :name => 'some-thing',
+          :guid => '328fcb71-f383-4de0-b1d8-d81a4c53ffcf'
+        },
+        {
+          :name => 'some-thing-else',
+          :guid => '328fcb71-f383-4de0-b1d8-d81a4c53ffcg'
         }
-      ] }.to_json
-    end
+      ]
+    }
   end
 end
