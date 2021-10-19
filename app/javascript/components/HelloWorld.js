@@ -13,6 +13,11 @@ function getThings() {
 
 class HelloWorld extends React.Component {
   render () {
+    const { things } = this.props
+    const thingsList = things.map((thing) => {
+      return <li key={thing.id}>{thing.name}</li>
+    })
+
     return (
       <React.Fragment>
         Greeting: {this.props.greeting}
@@ -23,6 +28,10 @@ class HelloWorld extends React.Component {
         >
           Get Things
         </button>
+        <br />
+        <ul>
+          {thingsList}
+        </ul>
       </React.Fragment>
     );
   }
