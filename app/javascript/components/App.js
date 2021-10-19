@@ -4,6 +4,7 @@ import { Provider } from "react-redux"
 import configureStore from "../configureStore"
 
 import HelloWorld from "./HelloWorld"
+
 const store = configureStore();
 
 class App extends React.Component {
