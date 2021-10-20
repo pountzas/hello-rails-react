@@ -1,48 +1,44 @@
-import React from "react"
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-const GET_THINGS_REQUEST = 'GET_THINGS_REQUEST';
-const GET_THINGS_SUCCESS = 'GET_THINGS_SUCCESS';
+const GET_GREETINGS_REQUEST = 'GET_GREETINGS_REQUEST';
+const GET_GREETINGS_SUCCESS = 'GET_GREETINGS_SUCCESS';
 
-function getThings() {
-  console.log('getThings() Action!!')
-  return dispatch => {
-    dispatch({ type: GET_THINGS_REQUEST });
-    return fetch(`v1/things.json`)
-      .then(response => response.json())
-      .then(json => dispatch(getThingsSuccess(json)))
-      .catch(error => console.log(error));
+function getGreetings() {
+  return (dispatch) => {
+    dispatch({ type: GET_GREETINGS_REQUEST });
+    return fetch('v1/greetings.json')
+      .then((response) => response.json())
+      .then((json) => dispatch(getGreetingsSuccess(json)))
+      .catch((error) => error);
   };
 };
 
-export function getThingsSuccess(json) {
+function getGreetingsSuccess(json) {
   return {
-    type: GET_THINGS_SUCCESS,
+    type: GET_GREETINGS_SUCCESS,
     json
   };
 };
 
-
-class HelloWorld extends React.Component {
+class Greeting extends React.Component {
+  componentDidMount() {
+    this.props.getGreetings()
+  }
   render () {
-    const { things } = this.props;
-    const thingsList = things.map((thing) => {
-      return <li>{thing.name} {thing.guid}</li>
-    })
-
+    const { greetings } = this.props;
     return (
       <React.Fragment>
-        Greeting: {this.props.greeting}
-        <button className="getThingsBtn" onClick={() => this.props.getThings()}>getThings</button>
-        <br />
-        <ul>{ thingsList }</ul>
+        <h1>{ greetings[0].message }</h1>
       </React.Fragment>
     );
   }
 }
 const structuredSelector = createStructuredSelector({
-  things: state => state.things,
-}); 
-const mapDispatchToProps = { getThings };
-export default connect(structuredSelector, mapDispatchToProps)(HelloWorld);
+  greetings: state => state.greetings
+});
+
+const mapDispatchToProps = { getGreetings };
+
+export default connect(structuredSelector, mapDispatchToProps)(Greeting);
