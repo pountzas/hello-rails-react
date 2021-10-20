@@ -1,25 +1,29 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-
 const initialState = {
-  things: [
+  greetings: [
     {
-      name: 'test',
-      guid: '13123123'
+      message: '',
     }
   ]
 };
 
 function rootReducer(state, action) {
-  console.log(action.type);
   switch (action.type) {
-    case "GET_THINGS_SUCCESS":
-      return { things: action.json.things };
+    case 'GET_GREETINGS_SUCCESS':
+      return { greetings: action.json.greetings };
+    default:
+      return state
   }
-  return state;
 }
 
-export default function configureStore() {
-  const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
+function configureStore() {
+  const store = createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(thunk)
+  );
   return store;
 }
+
+export default configureStore;
