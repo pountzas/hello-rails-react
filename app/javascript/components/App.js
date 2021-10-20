@@ -1,9 +1,9 @@
 import React from "react"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom"
 import { Provider } from "react-redux"
 import configureStore from "../configureStore"
 
-import HelloWorld from "./Greeting"
+import Greeting from "./Greeting"
 
 const store = configureStore();
 
@@ -13,8 +13,8 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" render={() => ("Home!")} />
-            <Route path="/hello" render={() => <HelloWorld greeting="Friend" />} />
+            <Route exact path="/" render={() => <Link to="/greeting">Get greeting from the API</Link>} />
+            <Route path="/greeting" render={() => <Greeting />} />
           </Switch>
         </BrowserRouter>
       </Provider>
