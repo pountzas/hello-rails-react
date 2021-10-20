@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import { Provider } from "react-redux"
 import configureStore from "../configureStore"
 
-import HelloWorld from "./HelloWorld"
+import HelloWorld from "./Greeting"
 
 const store = configureStore();
 
